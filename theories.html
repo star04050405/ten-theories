@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>创富圈十大理论 · 号外</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="十大理论">
+<meta name="theme-color" content="#F3EDDF">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<style>
+:root{
+  --paper:#F3EDDF; --ink:#26221A; --dim:#8A8272; --line:rgba(38,34,26,.16);
+  --red:#C03A2B; --gold:#B08D3E;
+  --sans:"Helvetica Neue","Avenir Next","PingFang SC","Microsoft YaHei",sans-serif;
+  --disp:"Arial Black","Helvetica Neue","PingFang SC",sans-serif;
+  --serif:"Georgia","Songti SC","STSong",serif;
+  --mono:ui-monospace,"Courier New",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);max-width:660px;margin:0 auto;padding:0 18px 110px;-webkit-font-smoothing:antialiased}
+.paper-bg{position:fixed;inset:0;pointer-events:none;opacity:.5;z-index:0;
+ background-image:radial-gradient(rgba(38,34,26,.05) 1px, transparent 1px);background-size:22px 22px}
+header,.tcard,.checkin,footer,.stamp{position:relative;z-index:1}
+header{padding:40px 2px 8px;text-align:center}
+.flash{font-family:var(--mono);font-size:10px;letter-spacing:.5em;color:var(--red)}
+h1{font-family:var(--disp);font-size:clamp(34px,10.5vw,56px);line-height:1.08;margin-top:12px;letter-spacing:.02em}
+h1 span{color:var(--red)}
+.date-line{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--dim);margin-top:12px}
+.dbl{height:5px;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);margin:16px 0 0}
+/* 印章 */
+.stamp{position:absolute;right:20px;top:120px;width:76px;height:76px;border:3px solid rgba(192,58,43,.65);border-radius:50%;display:flex;align-items:center;justify-content:center;transform:rotate(12deg);color:rgba(192,58,43,.75);font-family:var(--disp);font-size:15px;line-height:1.3;text-align:center;pointer-events:none}
+/* 理论卡 */
+.tcard{margin-top:16px;border:1.5px solid var(--ink);border-radius:10px;background:rgba(255,255,255,.55);overflow:hidden}
+.tcard-h{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px dashed var(--line);cursor:pointer}
+.tcard-h .no{font-family:var(--disp);font-size:22px;color:var(--red);flex:none;letter-spacing:.01em}
+.tcard-h .nm{font-family:var(--disp);font-size:18px;flex:1;letter-spacing:.03em}
+.tcard-h .en{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;color:var(--dim);text-align:right}
+.tcard-h .arr{font-size:11px;color:var(--dim);transition:transform .3s}
+.tcard.open .tcard-h .arr{transform:rotate(90deg)}
+.tcard-b{display:none;padding:14px 16px 15px}
+.tcard.open .tcard-b{display:block}
+.declare{font-family:var(--serif);font-size:15px;line-height:1.95;border-left:3px solid var(--red);padding:2px 0 2px 14px;margin-bottom:12px}
+.pts{list-style:none}
+.pts li{font-size:12.5px;line-height:2;color:#4A4438;padding-left:18px;position:relative}
+.pts li::before{content:"✓";position:absolute;left:0;color:var(--red);font-weight:800}
+/* 打卡区 */
+.checkin{margin-top:30px;border:2px solid var(--ink);border-radius:14px;background:rgba(255,255,255,.6);padding:20px 18px}
+.checkin .k{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--red);text-align:center}
+.checkin h2{font-family:var(--disp);font-size:19px;text-align:center;margin-top:6px;letter-spacing:.04em}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:16px}
+.chk{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:99px;padding:10px 13px;cursor:pointer;background:rgba(255,255,255,.7);transition:all .2s}
+.chk .b{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--dim);flex:none;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;transition:all .2s}
+.chk.on{background:var(--ink);border-color:var(--ink)}
+.chk.on .b{background:var(--red);border-color:var(--red);color:#fff}
+.chk.on span{color:#F3EDDF;font-weight:700}
+.chk span{font-size:12px;letter-spacing:.04em}
+.verdict{margin-top:18px;text-align:center;padding:16px;border-top:1px dashed var(--line)}
+.verdict .v1{font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;color:var(--dim)}
+.verdict .v2{font-family:var(--disp);font-size:22px;margin-top:8px;letter-spacing:.04em}
+.verdict .v2 b{color:var(--red)}
+.verdict p{font-size:11.5px;color:var(--dim);margin-top:8px;line-height:1.9}
+footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:9.5px;color:var(--dim);line-height:2.1;letter-spacing:.08em;text-align:center}
+#toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#26221A;color:#F3EDDF;font-size:12px;letter-spacing:.1em;padding:9px 18px;border-radius:99px;z-index:970;opacity:0;transition:opacity .3s;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="paper-bg"></div>
+<header>
+  <div class="flash">EXTRA · EXTRA · 紧急科普</div>
+  <h1>创富圈<span>十大</span>理论</h1>
+  <div class="date-line" id="dateline"></div>
+  <div class="dbl"></div>
+</header>
+<div class="stamp">创富圈<br>认证</div>
+<div id="list"></div>
+<div class="checkin">
+  <div class="k">/// DAILY PRACTICE</div>
+  <h2>今日 · 你践行了哪几条？</h2>
+  <div class="grid" id="grid"></div>
+  <div class="verdict">
+    <div class="v1">/// 今日称号</div>
+    <div class="v2" id="verdict"></div>
+    <p id="vdesc"></p>
+  </div>
+</div>
+<footer>/// 十大理论来源于民间创富圈智慧 · 仅供娱乐与自我打气<br>/// 践行记录按日保存 · 健康问题请遵专业建议</footer>
+<div id="toast"></div>
+<script>
+const T = [
+ {no:"01", nm:"薄肌理论", en:"LEAN MUSCLE", declare:"健康的低脂肪身材，加上矫健帅气的肌肉——要的是脱衣有肉，穿衣显瘦。",
+  pts:["力量训练与有氧并存","体脂率比体重秤数字重要"]},
+ {no:"02", nm:"大睡理论", en:"GREAT SLEEP", declare:"每天雷打不动睡满 8 个小时，并确保优质的深度睡眠——绝不熬夜。",
+  pts:["固定入睡时间就是最贵的自律","睡前一小时远离屏幕"]},
+ {no:"03", nm:"大水理论", en:"HYDRATION", declare:"平均每天喝 1.5–2L 的纯净水，不喝奶茶饮料以及不健康的饮品。",
+  pts:["水杯随身带，渴之前先喝","奶茶是甜品，不是水"]},
+ {no:"04", nm:"黄毛理论", en:"BE YOURSELF", declare:"不被传统规矩束缚，自利且自我优先，敢爱敢恨，不在乎他人眼光。",
+  pts:["先照顾好自己，再谈别的","他人的眼光不构成你的义务"]},
+ {no:"05", nm:"大蛋理论", en:"EGG DAILY", declare:"保持每天吃三个白煮鸡蛋的习惯，确保自己有足够的实惠蛋白质。",
+  pts:["便宜、优质、顶饱三合一","水煮蛋是蛋白质的性价比之王"]},
+ {no:"06", nm:"大菜理论", en:"MORE VEGGIES", declare:"确保自己摄入 300–500g 蔬菜，而不是每天只吃各种精加工的食品。",
+  pts:["每餐先夹一筷子绿","深色蔬菜占一半"]},
+ {no:"07", nm:"大锅理论", en:"HOME COOKING", declare:"吃自己做的菜，并只用水煮或简单清炒的方式烹饪，不吃太多油腻。",
+  pts:["厨房是最省钱的健身房","少油少盐，原味优先"]},
+ {no:"08", nm:"氧气理论", en:"OXYGEN RUN", declare:"每周跑步，理想化 30 公里，少一点则 20 公里，保持健康肺活。",
+  pts:["配速不重要，跑起来才重要","里程是攒出来的"]},
+ {no:"09", nm:"孙学理论", en:"SELF-INTEREST", declare:"凡事利益至上，不在乎他人观感和舆论，以自己能得到实际好处为最高优先级。",
+  pts:["先算自己的账，再看别人的嘴","拒绝也是生产力"]},
+ {no:"10", nm:"纯日子理论", en:"SIMPLE LIFE", declare:"对自己没有要求，只在乎凑合活着，把日子简单过，随自己心意。",
+  pts:["躺平是权利，不是失败","简单的日子最养人"]}
+];
+const KEY="tentheories";
+const today = new Date().toISOString().slice(0,10);
+let done = {};
+try{ const raw = JSON.parse(localStorage.getItem(KEY)||"{}"); if(raw.date===today) done = raw.done||{}; }catch(e){}
+function save(){ localStorage.setItem(KEY, JSON.stringify({date:today, done})); }
+const dt = new Date();
+document.getElementById("dateline").textContent =
+ dt.getFullYear()+"年"+(dt.getMonth()+1)+"月"+dt.getDate()+"日 · 星期"+"日一二三四五六"[dt.getDay()]+" · 第 "+Math.ceil((dt-new Date(dt.getFullYear(),0,0))/86400000)+" 期";
+document.getElementById("list").innerHTML = T.map((t,i)=>
+ `<div class="tcard" id="tc${i}">
+    <div class="tcard-h" onclick="tog(${i})">
+      <span class="no">No.${t.no}</span>
+      <span class="nm">${t.nm}</span>
+      <span class="en">${t.en}<br>THEORY</span>
+      <span class="arr">→</span>
+    </div>
+    <div class="tcard-b">
+      <div class="declare">${t.declare}</div>
+      <ul class="pts">${t.pts.map(p=>`<li>${p}</li>`).join("")}</ul>
+    </div>
+  </div>`).join("");
+function tog(i){ document.getElementById("tc"+i).classList.toggle("open"); }
+function renderChk(){
+  document.getElementById("grid").innerHTML = T.map((t,i)=>
+   `<div class="chk ${done[i]?"on":""}" onclick="tg(${i})"><span class="b">✓</span><span>${t.nm}</span></div>`).join("");
+  const n = Object.values(done).filter(Boolean).length;
+  const V = n>=10 ? ["十大全才 · 创富圣体","十项全勾，你就是行走的创富圈教材。"]
+        : n>=7 ? ["理论践行家","七条以上，圈子都得喊你一声老师。"]
+        : n>=4 ? ["入门创富人","过半了，风向已经开始偏向你。"]
+        : n>=1 ? ["纯日子大师（预备）","有一条算一条，纯日子也是讲究方法的。"]
+        : ["观望型选手","一条都没勾——今天先从大水理论开始？"];
+  document.getElementById("verdict").innerHTML = "「<b>"+V[0]+"</b>」· 勾了 "+n+" 条";
+  document.getElementById("vdesc").textContent = V[1];
+}
+function tg(i){
+  done[i] = !done[i]; save(); renderChk();
+  if(done[i]) toast("✓ "+T[i].nm+" 今日达成");
+}
+let toastTimer;
+function toast(m){
+  const t=document.getElementById("toast");
+  t.textContent=m; t.style.opacity=1;
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.style.opacity=0,1400);
+}
+renderChk();
+</script>
+</body>
+</html>

@@ -1,10 +1,10 @@
 {
-  "name": "创富圈十大理论",
+  "name": "创富圈十大理论 NEXUS",
   "short_name": "十大理论",
   "start_url": "./theories.html",
   "display": "standalone",
-  "background_color": "#F3EDDF",
-  "theme_color": "#F3EDDF",
+  "background_color": "#05060A",
+  "theme_color": "#05060A",
   "icons": [
     {
       "src": "icon-192.png",

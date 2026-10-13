@@ -3,91 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>创富圈十大理论 · 号外</title>
+<title>创富圈十大理论 · NEXUS</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="十大理论">
-<meta name="theme-color" content="#F3EDDF">
+<meta name="theme-color" content="#05060A">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <style>
 :root{
-  --paper:#F3EDDF; --ink:#26221A; --dim:#8A8272; --line:rgba(38,34,26,.16);
-  --red:#C03A2B; --gold:#B08D3E;
+  --bg:#05060A; --card:rgba(13,17,28,.72); --fg:#EAF2FF; --dim:#5E6B85;
+  --cy:#00F0FF; --pu:#8B5CF6; --pk:#FF2E88; --or:#FF9E2C; --gr:#00FF9D; --bl:#4D7CFE;
+  --line:rgba(120,160,255,.14);
   --sans:"Helvetica Neue","Avenir Next","PingFang SC","Microsoft YaHei",sans-serif;
   --disp:"Arial Black","Helvetica Neue","PingFang SC",sans-serif;
-  --serif:"Georgia","Songti SC","STSong",serif;
-  --mono:ui-monospace,"Courier New",monospace;
+  --mono:ui-monospace,"SF Mono","Courier New",monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);max-width:660px;margin:0 auto;padding:0 18px 110px;-webkit-font-smoothing:antialiased}
-.paper-bg{position:fixed;inset:0;pointer-events:none;opacity:.5;z-index:0;
- background-image:radial-gradient(rgba(38,34,26,.05) 1px, transparent 1px);background-size:22px 22px}
-header,.tcard,.checkin,footer,.stamp{position:relative;z-index:1}
-header{padding:40px 2px 8px;text-align:center}
-.flash{font-family:var(--mono);font-size:10px;letter-spacing:.5em;color:var(--red)}
-h1{font-family:var(--disp);font-size:clamp(34px,10.5vw,56px);line-height:1.08;margin-top:12px;letter-spacing:.02em}
-h1 span{color:var(--red)}
-.date-line{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--dim);margin-top:12px}
-.dbl{height:5px;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);margin:16px 0 0}
-/* 印章 */
-.stamp{position:absolute;right:20px;top:120px;width:76px;height:76px;border:3px solid rgba(192,58,43,.65);border-radius:50%;display:flex;align-items:center;justify-content:center;transform:rotate(12deg);color:rgba(192,58,43,.75);font-family:var(--disp);font-size:15px;line-height:1.3;text-align:center;pointer-events:none}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);max-width:680px;margin:0 auto;padding:0 18px 120px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+/* 网格+光晕背景 */
+.bgfx{position:fixed;inset:0;pointer-events:none;z-index:0}
+.bgfx .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,240,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,.05) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 30%,transparent 75%)}
+.bgfx .glow1{position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:560px;height:360px;background:radial-gradient(ellipse,rgba(0,240,255,.16),transparent 65%);filter:blur(30px)}
+.bgfx .glow2{position:absolute;top:180px;right:-120px;width:340px;height:340px;background:radial-gradient(circle,rgba(139,92,246,.14),transparent 65%);filter:blur(40px)}
+.bgfx .glow3{position:absolute;bottom:-80px;left:-100px;width:380px;height:380px;background:radial-gradient(circle,rgba(255,46,136,.10),transparent 65%);filter:blur(44px)}
+.scan{position:fixed;left:0;right:0;height:120px;z-index:0;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(0,240,255,.035),transparent);animation:scan 7s linear infinite}
+@keyframes scan{0%{top:-120px}100%{top:100%}}
+header,.tcard,.core,footer{position:relative;z-index:1}
+header{padding:64px 2px 10px;text-align:center}
+.sys{font-family:var(--mono);font-size:10px;letter-spacing:.42em;color:var(--cy);text-shadow:0 0 12px rgba(0,240,255,.6)}
+.sys i{font-style:normal;animation:blink 1.1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+h1{font-family:var(--disp);font-size:clamp(38px,11.5vw,68px);line-height:1.05;margin-top:16px;letter-spacing:.02em;
+ background:linear-gradient(92deg,var(--cy) 8%,var(--pu) 42%,var(--pk) 72%,var(--or) 96%);
+ -webkit-background-clip:text;background-clip:text;color:transparent;
+ filter:drop-shadow(0 0 22px rgba(0,240,255,.35)) drop-shadow(0 0 60px rgba(139,92,246,.22))}
+.sub{margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--dim);line-height:2}
+.sub b{color:var(--cy);font-weight:400}
+/* 数据舱 */
+.core{margin-top:26px;border:1px solid var(--line);border-radius:16px;background:var(--card);backdrop-filter:blur(14px);padding:18px 16px}
+.crow{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--dim)}
+.crow .lv{color:var(--gr);text-shadow:0 0 10px rgba(0,255,157,.5)}
+.cbar{height:6px;border-radius:3px;background:rgba(120,160,255,.12);margin:12px 0 10px;overflow:hidden;position:relative}
+.cbar i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--cy),var(--pu),var(--pk));box-shadow:0 0 14px rgba(0,240,255,.7);transition:width .6s cubic-bezier(.3,1,.4,1)}
+.cbar i::after{content:"";position:absolute;right:0;top:0;bottom:0;width:8px;background:#fff;filter:blur(3px);border-radius:4px}
+.cfoot{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--dim)}
+.cfoot b{color:var(--fg);font-weight:400}
 /* 理论卡 */
-.tcard{margin-top:16px;border:1.5px solid var(--ink);border-radius:10px;background:rgba(255,255,255,.55);overflow:hidden}
-.tcard-h{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px dashed var(--line);cursor:pointer}
-.tcard-h .no{font-family:var(--disp);font-size:22px;color:var(--red);flex:none;letter-spacing:.01em}
-.tcard-h .nm{font-family:var(--disp);font-size:18px;flex:1;letter-spacing:.03em}
-.tcard-h .en{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;color:var(--dim);text-align:right}
-.tcard-h .arr{font-size:11px;color:var(--dim);transition:transform .3s}
+.tcard{margin-top:14px;border-radius:16px;position:relative;background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.02));padding:1px;opacity:0;transform:translateY(14px);animation:in .55s forwards}
+@keyframes in{to{opacity:1;transform:none}}
+.tcard::before{content:"";position:absolute;inset:0;border-radius:16px;padding:1px;background:linear-gradient(135deg,var(--c1),transparent 40%,transparent 60%,var(--c2));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.tcard-in{background:var(--card);backdrop-filter:blur(14px);border-radius:15px;overflow:hidden}
+.tcard-h{display:flex;align-items:center;gap:14px;padding:16px 18px;cursor:pointer}
+.tcard-h .no{font-family:var(--disp);font-size:26px;flex:none;color:var(--c1);text-shadow:0 0 18px var(--c1)}
+.tcard-h .nm{font-family:var(--disp);font-size:17.5px;flex:1;letter-spacing:.04em}
+.tcard.open .tcard-h .nm{text-shadow:0 0 16px var(--c1)}
+.tcard-h .en{font-family:var(--mono);font-size:8px;letter-spacing:.24em;color:var(--dim);text-align:right;line-height:1.7}
+.tcard-h .arr{font-family:var(--mono);font-size:11px;color:var(--c1);transition:transform .3s}
 .tcard.open .tcard-h .arr{transform:rotate(90deg)}
-.tcard-b{display:none;padding:14px 16px 15px}
+.tcard-b{display:none;padding:2px 18px 18px}
 .tcard.open .tcard-b{display:block}
-.declare{font-family:var(--serif);font-size:15px;line-height:1.95;border-left:3px solid var(--red);padding:2px 0 2px 14px;margin-bottom:12px}
-.pts{list-style:none}
-.pts li{font-size:12.5px;line-height:2;color:#4A4438;padding-left:18px;position:relative}
-.pts li::before{content:"✓";position:absolute;left:0;color:var(--red);font-weight:800}
-/* 打卡区 */
-.checkin{margin-top:30px;border:2px solid var(--ink);border-radius:14px;background:rgba(255,255,255,.6);padding:20px 18px}
-.checkin .k{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--red);text-align:center}
-.checkin h2{font-family:var(--disp);font-size:19px;text-align:center;margin-top:6px;letter-spacing:.04em}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:16px}
-.chk{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:99px;padding:10px 13px;cursor:pointer;background:rgba(255,255,255,.7);transition:all .2s}
-.chk .b{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--dim);flex:none;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;transition:all .2s}
-.chk.on{background:var(--ink);border-color:var(--ink)}
-.chk.on .b{background:var(--red);border-color:var(--red);color:#fff}
-.chk.on span{color:#F3EDDF;font-weight:700}
-.chk span{font-size:12px;letter-spacing:.04em}
-.verdict{margin-top:18px;text-align:center;padding:16px;border-top:1px dashed var(--line)}
-.verdict .v1{font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;color:var(--dim)}
-.verdict .v2{font-family:var(--disp);font-size:22px;margin-top:8px;letter-spacing:.04em}
-.verdict .v2 b{color:var(--red)}
-.verdict p{font-size:11.5px;color:var(--dim);margin-top:8px;line-height:1.9}
-footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:9.5px;color:var(--dim);line-height:2.1;letter-spacing:.08em;text-align:center}
-#toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#26221A;color:#F3EDDF;font-size:12px;letter-spacing:.1em;padding:9px 18px;border-radius:99px;z-index:970;opacity:0;transition:opacity .3s;pointer-events:none}
+.declare{font-size:14px;line-height:2;color:#C8D6EE;border:1px solid var(--line);border-radius:12px;padding:13px 15px;background:rgba(0,240,255,.03);position:relative}
+.declare::before{content:"▍";color:var(--c1);margin-right:2px}
+.pts{list-style:none;margin-top:12px}
+.pts li{font-size:12px;line-height:2.1;color:var(--dim);padding-left:20px;position:relative}
+.pts li::before{content:"▸";position:absolute;left:0;color:var(--c1)}
+.tcard.open .tcard-in{box-shadow:0 0 40px rgba(0,240,255,.07), inset 0 0 30px rgba(139,92,246,.04)}
+/* 充能舱 */
+.dock{margin-top:34px;border-radius:20px;padding:1px;background:linear-gradient(135deg,var(--cy),var(--pu) 50%,var(--pk))}
+.dock-in{background:rgba(8,11,18,.92);backdrop-filter:blur(16px);border-radius:19px;padding:22px 18px}
+.dock .k{font-family:var(--mono);font-size:10px;letter-spacing:.34em;color:var(--cy);text-align:center;text-shadow:0 0 12px rgba(0,240,255,.6)}
+.dock h2{font-family:var(--disp);font-size:18px;text-align:center;margin-top:8px;letter-spacing:.05em}
+.slots{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:18px}
+.slot{border:1px solid var(--line);border-radius:12px;padding:12px 4px 10px;text-align:center;cursor:pointer;background:rgba(255,255,255,.02);transition:all .25s;position:relative;overflow:hidden}
+.slot .sig{font-family:var(--disp);font-size:15px;display:block}
+.slot .nm2{font-size:9.5px;color:var(--dim);margin-top:5px;letter-spacing:.08em}
+.slot.on{border-color:var(--sc);background:rgba(255,255,255,.04);box-shadow:0 0 18px rgba(255,255,255,.05), inset 0 0 14px rgba(255,255,255,.03)}
+.slot.on .sig{color:var(--sc);text-shadow:0 0 14px var(--sc)}
+.slot.on .nm2{color:var(--fg)}
+.slot .pulse{position:absolute;inset:0;background:radial-gradient(circle at 50% 100%,var(--sc),transparent 60%);opacity:0;transition:opacity .3s}
+.slot.on .pulse{opacity:.14}
+.vpanel{margin-top:18px;border-top:1px solid var(--line);padding-top:18px;text-align:center}
+.vpanel .k{font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:var(--dim)}
+.vpanel .v2{font-family:var(--disp);font-size:24px;margin-top:10px;letter-spacing:.03em;
+ background:linear-gradient(92deg,var(--cy),var(--pk));-webkit-background-clip:text;background-clip:text;color:transparent;
+ filter:drop-shadow(0 0 16px rgba(255,46,136,.35))}
+.vpanel p{font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:9px;letter-spacing:.12em;line-height:1.9}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:9px;color:var(--dim);line-height:2.1;letter-spacing:.1em;text-align:center}
+#toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%);background:rgba(0,240,255,.12);border:1px solid rgba(0,240,255,.4);color:var(--cy);font-family:var(--mono);font-size:12px;letter-spacing:.14em;padding:10px 20px;border-radius:99px;z-index:970;opacity:0;transition:opacity .3s;pointer-events:none;backdrop-filter:blur(8px)}
+.cfp{position:fixed;width:6px;height:6px;border-radius:50%;z-index:960;pointer-events:none}
 </style>
 </head>
 <body>
-<div class="paper-bg"></div>
+<div class="bgfx"><div class="grid"></div><div class="glow1"></div><div class="glow2"></div><div class="glow3"></div></div>
+<div class="scan"></div>
 <header>
-  <div class="flash">EXTRA · EXTRA · 紧急科普</div>
-  <h1>创富圈<span>十大</span>理论</h1>
-  <div class="date-line" id="dateline"></div>
-  <div class="dbl"></div>
+  <div class="sys">SYSTEM ONLINE <i>▊</i> NEXUS-10</div>
+  <h1>创富圈十大理论</h1>
+  <div class="sub">FORTUNE PROTOCOLS // 民间高手智慧内核<br>已解码 <b>10</b> 条 · 选择你的强化路线</div>
 </header>
-<div class="stamp">创富圈<br>认证</div>
+<div class="core">
+  <div class="crow"><span>PROTOCOL LOAD</span><span class="lv" id="coreLv">STANDBY</span></div>
+  <div class="cbar"><i id="cBar"></i></div>
+  <div class="cfoot"><span>已激活 <b id="cN">0</b> / 10</span><span>日期 <b id="cDate"></b></span></div>
+</div>
 <div id="list"></div>
-<div class="checkin">
-  <div class="k">/// DAILY PRACTICE</div>
-  <h2>今日 · 你践行了哪几条？</h2>
-  <div class="grid" id="grid"></div>
-  <div class="verdict">
-    <div class="v1">/// 今日称号</div>
-    <div class="v2" id="verdict"></div>
-    <p id="vdesc"></p>
+<div class="dock">
+  <div class="dock-in">
+    <div class="k">/// DAILY CHARGE · 今日充能</div>
+    <h2>点亮你今天执行的理论</h2>
+    <div class="slots" id="slots"></div>
+    <div class="vpanel">
+      <div class="k">/// TODAY RANK</div>
+      <div class="v2" id="verdict"></div>
+      <p id="vdesc"></p>
+    </div>
   </div>
 </div>
-<footer>/// 十大理论来源于民间创富圈智慧 · 仅供娱乐与自我打气<br>/// 践行记录按日保存 · 健康问题请遵专业建议</footer>
+<footer>/// NEXUS-10 · 民间创富圈智慧汇编 · 仅供娱乐与自我打气<br>/// 充能记录按日重置 · 健康问题请遵专业建议</footer>
 <div id="toast"></div>
 <script>
+const C = ["#00F0FF","#8B5CF6","#FF2E88","#FF9E2C","#00FF9D","#4D7CFE","#00F0FF","#8B5CF6","#FF2E88","#00FF9D"];
 const T = [
  {no:"01", nm:"薄肌理论", en:"LEAN MUSCLE", declare:"健康的低脂肪身材，加上矫健帅气的肌肉——要的是脱衣有肉，穿衣显瘦。",
   pts:["力量训练与有氧并存","体脂率比体重秤数字重要"]},
@@ -110,43 +146,66 @@ const T = [
  {no:"10", nm:"纯日子理论", en:"SIMPLE LIFE", declare:"对自己没有要求，只在乎凑合活着，把日子简单过，随自己心意。",
   pts:["躺平是权利，不是失败","简单的日子最养人"]}
 ];
+const SIG = ["肌","眠","水","我","蛋","菜","锅","氧","利","日"];
 const KEY="tentheories";
 const today = new Date().toISOString().slice(0,10);
 let done = {};
 try{ const raw = JSON.parse(localStorage.getItem(KEY)||"{}"); if(raw.date===today) done = raw.done||{}; }catch(e){}
 function save(){ localStorage.setItem(KEY, JSON.stringify({date:today, done})); }
-const dt = new Date();
-document.getElementById("dateline").textContent =
- dt.getFullYear()+"年"+(dt.getMonth()+1)+"月"+dt.getDate()+"日 · 星期"+"日一二三四五六"[dt.getDay()]+" · 第 "+Math.ceil((dt-new Date(dt.getFullYear(),0,0))/86400000)+" 期";
-document.getElementById("list").innerHTML = T.map((t,i)=>
- `<div class="tcard" id="tc${i}">
-    <div class="tcard-h" onclick="tog(${i})">
-      <span class="no">No.${t.no}</span>
-      <span class="nm">${t.nm}</span>
-      <span class="en">${t.en}<br>THEORY</span>
-      <span class="arr">→</span>
-    </div>
-    <div class="tcard-b">
-      <div class="declare">${t.declare}</div>
-      <ul class="pts">${t.pts.map(p=>`<li>${p}</li>`).join("")}</ul>
-    </div>
-  </div>`).join("");
+document.getElementById("cDate").textContent = today.slice(5).replace("-","·");
+document.getElementById("list").innerHTML = T.map((t,i)=>`
+ <div class="tcard" id="tc${i}" style="--c1:${C[i]};--c2:${C[(i+3)%10]};animation-delay:${i*70}ms">
+  <div class="tcard-in">
+   <div class="tcard-h" onclick="tog(${i})">
+     <span class="no">${t.no}</span>
+     <span class="nm">${t.nm}</span>
+     <span class="en">${t.en}<br>PROTOCOL</span>
+     <span class="arr">›</span>
+   </div>
+   <div class="tcard-b">
+     <div class="declare">${t.declare}</div>
+     <ul class="pts">${t.pts.map(p=>`<li>${p}</li>`).join("")}</ul>
+   </div>
+  </div>
+ </div>`).join("");
 function tog(i){ document.getElementById("tc"+i).classList.toggle("open"); }
-function renderChk(){
-  document.getElementById("grid").innerHTML = T.map((t,i)=>
-   `<div class="chk ${done[i]?"on":""}" onclick="tg(${i})"><span class="b">✓</span><span>${t.nm}</span></div>`).join("");
+function renderCore(){
   const n = Object.values(done).filter(Boolean).length;
-  const V = n>=10 ? ["十大全才 · 创富圣体","十项全勾，你就是行走的创富圈教材。"]
+  document.getElementById("cN").textContent = n;
+  document.getElementById("cBar").style.width = (n*10)+"%";
+  document.getElementById("coreLv").textContent = n>=10?"OVERFLOW":n>=7?"MAX POWER":n>=4?"CHARGING":n>=1?"WARM UP":"STANDBY";
+  const V = n>=10 ? ["十大全才 · 创富圣体","十槽全亮——你就是行走的创富圈教材。"]
         : n>=7 ? ["理论践行家","七条以上，圈子都得喊你一声老师。"]
         : n>=4 ? ["入门创富人","过半了，风向已经开始偏向你。"]
         : n>=1 ? ["纯日子大师（预备）","有一条算一条，纯日子也是讲究方法的。"]
-        : ["观望型选手","一条都没勾——今天先从大水理论开始？"];
-  document.getElementById("verdict").innerHTML = "「<b>"+V[0]+"</b>」· 勾了 "+n+" 条";
-  document.getElementById("vdesc").textContent = V[1];
+        : ["观望型选手","一格都没亮——从大水理论开始充能？"];
+  document.getElementById("verdict").textContent = "「"+V[0]+"」";
+  document.getElementById("vdesc").textContent = V[1]+" · CHARGE "+n+"/10";
+}
+function renderSlots(){
+  document.getElementById("slots").innerHTML = T.map((t,i)=>`
+   <div class="slot ${done[i]?"on":""}" style="--sc:${C[i]}" onclick="tg(${i})">
+     <div class="pulse"></div>
+     <span class="sig">${SIG[i]}</span>
+     <span class="nm2">${t.nm.slice(0,2)}</span>
+   </div>`).join("");
 }
 function tg(i){
-  done[i] = !done[i]; save(); renderChk();
-  if(done[i]) toast("✓ "+T[i].nm+" 今日达成");
+  done[i] = !done[i]; save(); renderSlots(); renderCore();
+  if(done[i]){ confetti(C[i]); toast("✓ "+T[i].nm+" · 已充能"); }
+}
+function confetti(col){
+  for(let i=0;i<18;i++){
+    const c=document.createElement("div"); c.className="cfp";
+    c.style.background=i%3?col:"#EAF2FF";
+    c.style.left=(34+Math.random()*32)+"vw"; c.style.top=(30+Math.random()*16)+"vh";
+    c.style.width=c.style.height=(4+Math.random()*6)+"px";
+    c.style.boxShadow="0 0 8px "+col;
+    document.body.appendChild(c);
+    const dx=(Math.random()-.5)*280, dy=100+Math.random()*240, rot=Math.random()*720-360;
+    c.animate([{transform:"none",opacity:1},{transform:`translate(${dx}px,${dy}px) rotate(${rot}deg)`,opacity:0}],
+      {duration:900+Math.random()*600, easing:"cubic-bezier(.2,.7,.4,1)"}).onfinish=()=>c.remove();
+  }
 }
 let toastTimer;
 function toast(m){
@@ -154,7 +213,7 @@ function toast(m){
   t.textContent=m; t.style.opacity=1;
   clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.style.opacity=0,1400);
 }
-renderChk();
+renderSlots(); renderCore();
 </script>
 </body>
 </html>
